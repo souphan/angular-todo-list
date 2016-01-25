@@ -63,3 +63,28 @@ app.controller("KeodoToDoCtrl", ["$scope", $firebaseArray",
   // click on `index.html` above to see it used in the DOM!
   syncObject.$bindTo($scope, "data");
 });
+
+                                 
+                                 
+                                 
+    
+                                 
+                                 
+                                 
+(function() {
+     function config($stateProvider, $locationProvider) {
+        $locationProvider
+         .html5Mode({
+             enabled: true,
+             requireBase: false
+         });
+         
+     $stateProvider
+         .state('landing', {
+             url: '/',
+             templateUrl: '/templates/landing.html'
+         });
+     }
+    
+var appRouter = angular.module("keodoToDo", ["ui.router"]);
+})();

@@ -1,30 +1,37 @@
-var myApp = angular.module("keodoToDo", ["ui.router", "firebase"]);
+var myapp = angular.module('myapp', ["ui.router"])
+myapp.config(function($stateProvider, $urlRouterProvider){
 
-myApp.controller("MyController", ["$scope", "$firebaseArray",
-function($scope, $firebaseArray) {
-  //CREATE A FIREBASE REFERENCE
-  var ref = new Firebase("https://keodo-todo-list.firebaseio.com/");
+// For any unmatched url, send to /route1
+$urlRouterProvider.otherwise("/route1")
 
-  // GET MESSAGES AS AN ARRAY
-  $scope.messages = $firebaseArray(ref);
+$stateProvider
+  .state('route1', {
+      url: "/route1",
+      templateUrl: "/templates/route1.html"
+   })
+  .state('route1.list', {
+      url: "/list",
+      templateUrl: "/templates/route1.list.html",
+      controller: function($scope){
+        $scope.items = ["Clean the hamster cage", "Complain about cleaning hamster cage"];
+      }
+    })
 
-  //ADD MESSAGE METHOD
-  $scope.addMessage = function(e) {
+  .state('route2', {
+      url: "/route2",
+      templateUrl: "/templates/route2.html"
+   })
+  .state('route2.list', {
+      url: "/list",
+      templateUrl: "/templates/route2.list.html",
+      controller: function($scope){
+         $scope.things = ["A", "Set", "Of", "Things"];
+        }
+    })
+  .state('landing', {
+      url: '/',
+      controller: 'LandingCtrl as landing',
+      templateUrl: '/templates/landing.html'
+    })
 
-    //LISTEN FOR RETURN KEY
-    if (e.keyCode === 13 && $scope.msg) {
-      //ALLOW CUSTOM OR ANONYMOUS USER NAMES
-      var name = $scope.name || "anonymous";
-
-      //ADD TO FIREBASE
-      $scope.messages.$add({
-        from: name,
-        body: $scope.msg
-      });
-
-      //RESET MESSAGE
-      $scope.msg = "";
-    }
-  }
-}
-]);
+})
