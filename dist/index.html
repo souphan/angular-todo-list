@@ -1,28 +1,120 @@
 <!doctype html>
-<html ng-app="myapp">
+<html>
 <head lang="en">
     <meta charset="UTF-8">
     <title>Keodo To-Do List</title>
     <link rel="stylesheet" href="/styles/style.css"/>
-    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap.min.css" rel="stylesheet">
-  </head>
-<body class="container">
-  <div class="navbar">
-    <div class="navbar-inner">
-      <a class="brand" href="#">Current Tasks</a>
-      <ul class="nav">
-        <li><a ui-sref="route1">Task 1</a></li>
-        <li><a ui-sref="route2">Task 2</a></li>
-        <li><a ui-sref="landing">Task List</a></li>
-      </ul>
+<!--    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap.min.css" rel="stylesheet">-->
+</head>
+<div ui-view></div>
+<div ng-controller="TodoCtrl" class="container" ng-app="TodoApp">
+
+<h2>ToDo list using AngularJS and Firebase</h2>
+
+<!--ADD ITEM FORM-->
+<form name="todoForm">
+
+    <div>
+        <input type="text"
+               name="todoNameField"
+               ng-model="todoName"
+               placeholder="Add new task (min 3 chars)"
+               required ng-minlength="3"
+               class="form-control"
+               ng-keyup="($event.keyCode == 13 && todoName.length > 2) ? addItem() : return"
+               style="margin-bottom: 10px"
+                />
+
+        <button ng-click="addTodo()"
+                ng-hide="myForm.todoNameField.$invalid"
+                class="btn btn-primary" type="button"
+                >Save Todo
+        </button>
     </div>
-  </div>
-    
-  <div class="row">
-    <div class="span12">
-      <div class="well" ui-view></div>        
+
+</form>
+
+    <hr />
+
+<!--TODO LIST-->
+
+<h4 ng-show="(todos | filter:{status: 'pending'}).length">Pending</h4>
+
+<div ng-repeat="todo in todos | filter:{status: 'pending'}"
+     class="row list-item">
+
+    <div class="col-md-6">
+
+        <!--TODO LABEL-->
+        <span>{{todo.name}}</span>
     </div>
-  </div>  
+    <div class="col-md-6 text-right">
+        <!--START TODO BUTTON-->
+        <a class="btn btn-warning"
+           ng-click="startTodo($index, todo)">
+            Start
+        </a>
+
+        <!--DELETE TODO BUTTON-->
+        <a class="btn btn-danger"
+           ng-click="removeTodo($index, todo)">
+            <i class="glyphicon glyphicon-remove"></i> Remove
+        </a>
+
+    </div>
+
+</div>
+
+<h4 ng-show="(todos | filter:{status: 'in progress'}).length">In Progress</h4>
+
+<div ng-repeat="todo in todos | filter:{status: 'in progress'}"
+     class="row list-item bg-warning">
+
+    <div class="col-md-6">
+
+        <!--TODO LABEL-->
+        <span>{{todo.name}}</span>
+    </div>
+    <div class="col-md-6 text-right">
+        <!--COMPLETED TODO BUTTON-->
+        <a class="btn btn-primary"
+           ng-click="completeTodo($index, todo)">
+            <i class="glyphicon glyphicon-ok"></i> Complete
+        </a>
+
+        <!--DELETE TODO BUTTON-->
+        <a class="btn btn-danger"
+           ng-click="removeTodo($index, todo)">
+            <i class="glyphicon glyphicon-remove"></i> Remove
+        </a>
+
+    </div>
+
+</div>
+
+<h4 ng-show="(todos | filter:{status: 'complete'}).length">Completed</h4>
+
+<div ng-repeat="todo in todos | filter:{status: 'complete'}"
+     class="row list-item bg-success">
+
+    <div class="col-md-6">
+
+        <!--TODO LABEL-->
+        <span>{{todo.name}}</span>
+    </div>
+    <div class="col-md-6 text-right">
+
+        <!--DELETE TODO BUTTON-->
+        <a class="btn btn-danger"
+           ng-click="removeTodo($index, todo)">
+            <i class="glyphicon glyphicon-remove"></i> Remove
+        </a>
+
+    </div>
+
+</div>
+
+</div>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
     <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
     <script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>
@@ -30,6 +122,8 @@
     <!-- UI-Router -->
     <script src="//angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
     <script src="/scripts/app.js"></script>
+    <script src="/scripts/services/ToDoList.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
 <!--    <script src="/scripts/services/Firebase.js"></script>-->
-  </body>
+</body>
 </html>

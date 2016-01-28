@@ -4,6 +4,6 @@
      }
  
      angular
-         .module('keodoToDo')
+         .module('TodoApp')
          .controller('LandingCtrl', LandingCtrl);
  })();
