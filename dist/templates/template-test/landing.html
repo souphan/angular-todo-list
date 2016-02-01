@@ -1,0 +1,22 @@
+<body ng-controller="MyController">
+
+<!-- CHAT MARKUP -->
+<div class="chat-one container-one">
+  <header>Task entry</header>
+
+  <div class="chat-toolbar">
+    <input ng-model="name" type="text" id="nameInput" placeholder="Enter task name...">
+  </div>
+
+  <ul id="messages" class="chat-messages">
+    <li ng-repeat="msg in messages">
+      <strong class="task-name">{{ msg.from }}</strong>
+      {{ msg.body }}
+    </li>
+  </ul>
+
+  <footer>
+    <input ng-model="msg" ng-keydown="addMessage($event)" type="text" id="task-entry"  placeholder="Enter task here...">
+</div>
+  </footer>
+<div ui-view></div>
