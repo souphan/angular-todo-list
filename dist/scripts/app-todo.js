@@ -1,8 +1,8 @@
 var keodoToDo = angular.module('keodoToDo', ["ui.router"])
 keodoToDo.config(function($stateProvider, $urlRouterProvider){
     
-  // For any unmatched url, send to /route1
-  $urlRouterProvider.otherwise("/")
+    // For any unmatched url, send to /route1
+    $urlRouterProvider.otherwise("/")
 
      $stateProvider
      .state('landing', {
