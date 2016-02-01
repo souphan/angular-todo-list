@@ -22,18 +22,6 @@ appAngular.controller("KeodoToDoCtrl", ["$scope", "$firebaseArray",
         $scope.todoName = "";
 
     };
-  
-  
-      // REMOVE TODO ITEM METHOD
-    $scope.removeTodo = function (index, todo) {
-        
-        // CHECK THAT ITEM IS VALID
-        if (todo.id === undefined)return;
-
-        // FIREBASE: REMOVE ITEM FROM LIST
-        $scope.todos.$remove(todo);
-
-    };
       
         // MARK TODO AS IN PROGRESS METHOD
     $scope.startTodo = function (index, todo) {
@@ -46,3 +34,4 @@ appAngular.controller("KeodoToDoCtrl", ["$scope", "$firebaseArray",
         $scope.todos.$save(todo);
 
     };
+}]);
