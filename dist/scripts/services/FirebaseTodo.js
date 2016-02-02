@@ -1,6 +1,6 @@
 var appAngular = angular.module("keodoToDo", ["firebase"]);
 
-appAngular.controller("KeodoToDoCtrl", ["$scope", "$firebaseArray",
+keodoToDo.controller("KeodoToDoCtrl", ["$scope", "$firebaseArray",
   function($scope, $firebaseArray) {
     var todosRef = new Firebase('https://keodo-todo-list.firebaseio.com/');
 
