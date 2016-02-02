@@ -1,4 +1,4 @@
-var appAngular = angular.module("keodoToDo", ["firebase"]);
+var appAngular = angular.module("keodoToDo");
 
 appAngular.controller("KeodoToDoCtrl", ["$scope", "$firebaseArray",
   function($scope, $firebaseArray) {

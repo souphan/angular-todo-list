@@ -1,4 +1,4 @@
-var keodoToDo = angular.module('keodoToDo', ["ui.router"])
+var keodoToDo = angular.module('keodoToDo', ["ui.router", "firebase"])
 keodoToDo.config(function($stateProvider, $urlRouterProvider){
     
     // For any unmatched url, send to /route1

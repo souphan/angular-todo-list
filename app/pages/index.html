@@ -19,53 +19,8 @@
   </div>
       <div class="well" ui-view></div>    
     
-<!--ADD ITEM FORM-->
-<form name="todoForm">
 
-    <div>
-        <input type="text"
-               name="todoNameField"
-               ng-model="todoName"
-               placeholder="Add new task (min 3 chars)"
-               required ng-minlength="3"
-               class="form-control"
-               ng-keyup="($event.keyCode == 13 && todoName.length > 2) ? addItem() : return"
-               style="margin-bottom: 10px"
-                />
-
-        <button ng-click="addTodo()"
-                ng-hide="myForm.todoNameField.$invalid"
-                class="btn btn-primary" type="button"
-                >Save Todo
-        </button>
-    </div>
-
-</form>
-
-    <hr />
-
-<!--TODO LIST-->
-
-<h4 ng-show="(todos | filter:{status: 'pending'}).length">Pending</h4>
-
-<div ng-repeat="todo in todos | filter:{status: 'pending'}"
-     class="row list-item">
-
-    <div class="col-md-6">
-
-        <!--TODO LABEL-->
-        <span>{{todo.name}}</span>
-    </div>
-    <div class="col-md-6 text-right">
-        <!--START TODO BUTTON-->
-        <a class="btn btn-warning"
-           ng-click="startTodo($index, todo)">
-            Complete
-        </a>
-
-    </div>
-
-</div>
+    
            
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.js"></script>
 <script src="//angular-ui.github.io/ui-router/release/angular-ui-router.js"></script> 
