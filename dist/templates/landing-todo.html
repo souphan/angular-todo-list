@@ -5,12 +5,12 @@
         <input type="text"
                name="todoNameField"
                ng-model="todoName"
-               placeholder="Add new task (min 3 chars)"
+               placeholder="Add new task"
                required ng-minlength="3"
                class="form-control"
                ng-keyup="($event.keyCode == 13 && todoName.length > 2) ? addItem() : return"
-               style="margin-bottom: 10px"
-                />
+                >
+        </input>
 
         <button ng-click="addTodo()"
                 ng-hide="myForm.todoNameField.$invalid"
@@ -20,8 +20,6 @@
     </div>
 
 </form>
-
-    <hr />
 
 <!--TODO LIST-->
 

@@ -1,6 +1,24 @@
-<h1>Task history</h1>
-<hr/>
-<a ui-sref=".list">Show List</a>
+<!--ADD ITEM FORM-->
+<form name="todoForm">
+
+    <div>
+        <input type="text"
+               name="todoNameField"
+               ng-model="todoName"
+               placeholder="Add new task"
+               required ng-minlength="3"
+               class="form-control"
+               ng-keyup="($event.keyCode == 13 && todoName.length > 2) ? addItem() : return"
+                />
+
+        <button ng-click="addTodo()"
+                ng-hide="myForm.todoNameField.$invalid"
+                class="btn btn-primary" type="button"
+                >Save Todo
+        </button>
+    </div>
+
+</form>
 
 <h4 ng-show="(todos | filter:{status: 'complete'}).length">Completed</h4>
 
